@@ -1,0 +1,37 @@
+<!-- Validation failure messages -->
+<% if @topic.errors.any? %>
+  <% @topic.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Topic</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_topic" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for topic_phrase -->
+      <div class="form-group">
+        <label for="topic_phrase" class="control-label">
+          Topic phrase
+        </label>
+
+        <input type="text" id="topic_phrase" name="topic_phrase" placeholder="Topic phrase" class="form-control" value="<%= @topic.topic_phrase %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Topic
+      </button>
+      or
+      <a href="/topics">Cancel</a>
+    </form>
+  </div>
+</div>
